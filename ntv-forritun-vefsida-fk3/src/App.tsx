@@ -1,22 +1,23 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { Form } from "./components/Form";
+// import { ShopCard } from "./components/ShopCard";
+
 
 function App() {
-  const [myName, setMyName] = useState('')
-  const [myEmail, setMyEmail] = useState('')
-  const name = myName
-
+  const [state, setState] = useState(true)
   return (
-    <>
-      
-      <h1>Vite + React</h1>
-      <h2 id='output'>{name}</h2>
-      <input type="text" value={myName} onChange={(e) => setMyName(e.target.value)} />
-      <input type="email" value={myEmail} onChange={(e) => setMyEmail(e.target.value)} />
-      <button type="submit">Submit</button>
-     
-    </>
-  )
+    <div className="w-full justify-center">
+      <button onClick={() => {
+        setState(s => !s)
+      }}>Click</button>
+      {/* <ShopCard />
+      <ShopCard /> */}
+      {state &&
+        <Form />
+      }
+    </div>
+  );
 }
 
-export default App
+export default App;
