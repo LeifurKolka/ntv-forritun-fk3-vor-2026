@@ -65,6 +65,20 @@ npm run dev
 
 - **Products** tab: list and “Add to cart”.
 - **Cart** tab: list items and total (persisted in `localStorage`).
+- **Refactor (Todo)** tab: a single-file “monolith” page — break it into smaller components.
+
+## Component refactor: Todo (Monolith) page
+
+The **Refactor (Todo)** tab is a full todo list implemented in one component (`MonolithPage.tsx`). All state, handlers, form, filter buttons, and list rendering live in that file.
+
+**Exercise:** Split it into smaller pieces, for example:
+
+- **TodoItem** — one row (checkbox, label, delete button)
+- **TodoForm** — input + Add button
+- **TodoFilter** — filter tabs (All / Active / Done)
+- **useTodos** (optional) — state and `add` / `toggle` / `delete` logic
+
+Keep the same behaviour; only the structure should change.
 
 ## Refactor steps (for students)
 
