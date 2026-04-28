@@ -1,0 +1,149 @@
+/* Task list row — same shape as Storybook “taskbox” kynningu, með litum úr :root */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  max-width: 28rem;
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.04);
+  transition:
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.list-item.TASK_PINNED {
+  box-shadow:
+    inset 3px 0 0 0 oklch(0.72 0.14 85),
+    0 1px 2px oklch(0 0 0 / 0.06);
+}
+
+.list-item.TASK_ARCHIVED {
+  opacity: 0.72;
+}
+
+/* Falinn raunverulegur gátreitur — sýnilegur custom kassi */
+.checkbox {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.checkbox input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  opacity: 0;
+}
+
+.checkbox-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid var(--input);
+  border-radius: 0.25rem;
+  background: var(--background);
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.list-item:not(.TASK_ARCHIVED) .checkbox-custom:hover {
+  border-color: var(--ring);
+}
+
+.list-item.TASK_ARCHIVED .checkbox-custom {
+  background: var(--muted);
+  border-color: var(--muted-foreground);
+}
+
+.list-item.TASK_ARCHIVED .checkbox-custom::after {
+  content: '';
+  display: block;
+  width: 0.25rem;
+  height: 0.5rem;
+  margin-bottom: 0.1rem;
+  border: solid var(--foreground);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+}
+
+.title input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--foreground);
+  outline: none;
+}
+
+.list-item.TASK_ARCHIVED .title input {
+  text-decoration: line-through;
+  color: var(--muted-foreground);
+}
+
+.pin-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.pin-button:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.pin-button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.icon-star {
+  display: block;
+  line-height: 1;
+}
+
+.icon-star::before {
+  content: '★';
+  font-size: 1.125rem;
+  color: var(--muted-foreground);
+}
+
+.list-item.TASK_PINNED .icon-star::before {
+  color: oklch(0.58 0.16 75);
+}
+
+.list-item.TASK_PINNED .pin-button:hover .icon-star::before {
+  color: oklch(0.5 0.18 75);
+}
