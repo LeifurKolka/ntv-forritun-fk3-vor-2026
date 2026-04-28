@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: []
+  pull_request:
+
+env:
+  PROJECT: "lesson8"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: ${{ env.PROJECT }}/package-lock.json
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy to railway  
+        run: railway up --service  ${{ secrets.RAILWAY_SERVICE_ID }}        
+        working-directory: ${{ env.PROJECT }}
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
